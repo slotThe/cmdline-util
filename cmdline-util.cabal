@@ -1,0 +1,30 @@
+name:                cmdline-util
+version:             0.1.0.0
+-- synopsis:
+-- description:
+homepage:            https://github.com/githubuser/cmdline-util#readme
+license:             GPL-3
+license-file:        LICENSE
+author:              Tony Zorman
+maintainer:          Tony Zorman <soliditsallgood@mailbox.org>
+copyright:           2022  Tony Zorman
+category:            CLI
+build-type:          Simple
+cabal-version:       >= 1.10
+extra-source-files:  README.md
+
+library
+  hs-source-dirs:      src
+  exposed-modules:     CmdLine.Util
+  default-language:    Haskell2010
+  build-depends:       base >= 4.7 && < 5
+                     , text
+                     , transformers
+                     , mtl
+  ghc-options:         -Weverything
+                       -Wno-implicit-prelude
+                       -Wno-missing-import-lists
+                       -Wno-unused-packages
+                       -Wno-missing-safe-haskell-mode
+                       -Wno-all-missed-specialisations
+                       -Wno-unsafe
