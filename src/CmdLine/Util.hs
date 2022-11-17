@@ -1,7 +1,5 @@
-{-# LANGUAGE BangPatterns        #-}
-{-# LANGUAGE ImportQualifiedPost #-}
-{-# LANGUAGE OverloadedStrings   #-}
-{-# LANGUAGE ScopedTypeVariables #-}
+{-# LANGUAGE GHC2021           #-}
+{-# LANGUAGE OverloadedStrings #-}
 {- |
    Module      : CmdLine.Util
    Description : Personal utility functions for working with CLIs
@@ -15,6 +13,7 @@ module CmdLine.Util
     ( wrapText
     ) where
 
+import Data.Kind (Type)
 import Data.List (intersperse)
 import Data.Text (Text)
 import Data.Text qualified as T
@@ -42,7 +41,7 @@ wrapText separator al wrapAt chunks
      -> [Text]  -- Text as chunks that have to stay together
      -> GoState
   go !done _   !acc []        = GoState acc done
-  go !line sep !acc xs@(c:cs)
+  go line  sep  acc xs@(c:cs)
     | cLen      >= wrapAt = go goLine             sep (accum goAgain) cs
     | al + cLen >= wrapAt = go goLine             sep (accum goAgain) cs
     | combLen   >= wrapAt = go (align line)       sep al              xs
@@ -66,4 +65,5 @@ wrapText separator al wrapAt chunks
     end :: Text
     end = if null cs then "" else sep
 
+type GoState :: Type
 data GoState = GoState { accum :: !Int, processed :: !Text }
